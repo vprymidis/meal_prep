@@ -7,12 +7,21 @@
 <style>
   :root {
     --chicken: #e8a735;
+    --chicken-bg: #fef7e6;
     --fish: #4a9bd9;
+    --fish-bg: #e8f2fb;
     --legumes: #5ab55a;
-    --eggs: #d4a017;
+    --legumes-bg: #e8f6e8;
+    --eggs: #e8a735;
+    --eggs-bg: #fff8e1;
     --beef: #c0392b;
+    --beef-bg: #fce8e6;
+    --pork: #9b59b6;
+    --pork-bg: #f3e8f9;
     --snack: #7f8c8d;
+    --snack-bg: #f0f0f0;
     --leftovers: #95a5a6;
+    --leftovers-bg: #f5f5f5;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,6 +42,15 @@
   }
   header h1 { font-size: 1.6rem; margin-bottom: 0.3rem; }
   header p { font-size: 0.85rem; opacity: 0.85; }
+
+  .info-bar {
+    background: #fff3cd;
+    border-bottom: 1px solid #ffc107;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #856404;
+  }
 
   .day-tabs {
     display: flex;
@@ -89,19 +107,9 @@
   .badge-legumes { background: var(--legumes); }
   .badge-eggs { background: var(--eggs); }
   .badge-beef { background: var(--beef); }
+  .badge-pork { background: var(--pork); }
   .badge-snack { background: var(--snack); }
   .badge-leftovers { background: var(--leftovers); }
-
-  .batch-note {
-    background: #e3f2fd;
-    border-radius: 8px;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.82rem;
-    color: #1565c0;
-    margin-bottom: 1rem;
-    border-left: 3px solid #1565c0;
-  }
-  .batch-note strong { font-weight: 700; }
 
   .meal-section { margin-bottom: 1.5rem; }
   .meal-section-title {
@@ -127,6 +135,7 @@
   .recipe-card.cat-legumes { border-left-color: var(--legumes); }
   .recipe-card.cat-eggs { border-left-color: var(--eggs); }
   .recipe-card.cat-beef { border-left-color: var(--beef); }
+  .recipe-card.cat-pork { border-left-color: var(--pork); }
   .recipe-card.cat-snack { border-left-color: var(--snack); }
 
   .recipe-header {
@@ -186,6 +195,12 @@
   }
   .toddler-note::before { content: "Toddler tip: "; font-weight: 600; }
 
+  .snack-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
   .sunday-card {
     background: white;
     border-radius: 10px;
@@ -236,6 +251,10 @@
   <p>Balanced meals for 2 adults + 1 toddler &bull; Tap any recipe to see ingredients & instructions</p>
 </header>
 
+<div class="info-bar">
+  Based on AAP, NHS, USDA & WHO guidelines for toddler nutrition. Protein rotates across the week for balanced intake.
+</div>
+
 <nav class="day-tabs">
   <button class="day-tab active" onclick="showDay('mon')"><span class="day-full">Monday</span><span class="day-short">Mon</span></button>
   <button class="day-tab" onclick="showDay('tue')"><span class="day-full">Tuesday</span><span class="day-short">Tue</span></button>
@@ -251,11 +270,10 @@
   <div class="day-header">
     <h2>Monday</h2>
     <div class="protein-badges">
+      <span class="protein-badge badge-chicken">Chicken</span>
       <span class="protein-badge badge-legumes">Legumes</span>
-      <span class="protein-badge badge-fish">Fish</span>
     </div>
   </div>
-  <div class="batch-note"><strong>Batch cook day!</strong> Cook extra for both lunch and dinner &mdash; Tuesday uses the same meals from the fridge.</div>
 
   <div class="meal-section">
     <div class="meal-section-title">Morning Snack</div>
@@ -266,50 +284,102 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>1 slice wholemeal bread per person</li><li>Smooth peanut butter (no added salt/sugar)</li><li>1 banana, sliced</li></ul>
+        <ul>
+          <li>1 slice wholemeal bread per person</li>
+          <li>Smooth peanut butter (no added salt/sugar)</li>
+          <li>1 banana, sliced</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Toast bread and cut into finger-sized strips.</li><li>Spread a thin layer of peanut butter on each strip.</li><li>Top with banana slices.</li></ol>
-        <div class="toddler-note">Use smooth nut butter only. Spread thinly to avoid choking risk.</div>
+        <ol>
+          <li>Toast bread and cut into finger-sized strips</li>
+          <li>Spread a thin layer of peanut butter on each strip</li>
+          <li>Top with banana slices</li>
+        </ol>
+        <div class="toddler-note">Use smooth nut butter only (no whole nuts). Spread thinly to avoid choking risk.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Lunch &mdash; Legumes (adults, daughter at school)</div>
-    <div class="recipe-card cat-legumes">
+    <div class="meal-section-title">Lunch &mdash; Chicken</div>
+
+    <div class="recipe-card cat-chicken">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Red Lentil Dhal with Rice</span>
-        <div class="recipe-meta"><span>30 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
-      </div>
-      <div class="recipe-details">
-        <h4>Ingredients</h4>
-        <ul><li>200g red split lentils, rinsed</li><li>1 onion, finely diced</li><li>2 garlic cloves, minced</li><li>400ml coconut milk or 500ml water</li><li>1 tsp turmeric, 1 tsp cumin</li><li>1 tbsp olive oil</li><li>Rice to serve</li></ul>
-        <h4>Instructions</h4>
-        <ol><li>Heat oil, soften onion and garlic for 3 min.</li><li>Add lentils, spices, and liquid. Bring to boil, then simmer 20 min.</li><li>Lentils break down into a thick, creamy dhal. Add water if too thick.</li><li>Serve over rice with a squeeze of lemon. Tastes even better the next day.</li></ol>
-      </div>
-    </div>
-    <div class="recipe-card cat-legumes">
-      <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Chickpea & Sweet Potato Curry</span>
-        <div class="recipe-meta"><span>35 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
-      </div>
-      <div class="recipe-details">
-        <h4>Ingredients</h4>
-        <ul><li>1 tin chickpeas, drained</li><li>2 sweet potatoes, peeled and cubed</li><li>1 tin chopped tomatoes</li><li>1 onion, diced</li><li>200ml coconut milk</li><li>2 tsp mild curry powder</li><li>Handful of spinach</li><li>Rice or flatbread to serve</li></ul>
-        <h4>Instructions</h4>
-        <ol><li>Soften onion in oil for 3 min. Add curry powder, cook 1 min.</li><li>Add sweet potato, tomatoes, and coconut milk. Simmer 20 min until soft.</li><li>Stir in chickpeas and spinach. Cook 5 more min.</li><li>Serve with rice or warm flatbread.</li></ol>
-      </div>
-    </div>
-    <div class="recipe-card cat-legumes">
-      <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Rice Bowl with Tofu, Corn, Peas & Carrots</span>
+        <span class="recipe-title">Chicken Pasta with Peas</span>
         <div class="recipe-meta"><span>20 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>300g firm tofu, cubed</li><li>250g rice</li><li>100g sweetcorn (frozen or tinned)</li><li>100g frozen peas</li><li>1 large carrot, diced small</li><li>2 tbsp low-salt soy sauce</li><li>1 tbsp sesame oil</li><li>1 garlic clove, minced</li></ul>
+        <ul>
+          <li>300g pasta (penne or fusilli)</li>
+          <li>2 chicken breasts, diced</li>
+          <li>200g frozen peas</li>
+          <li>3 tbsp cr&egrave;me fra&icirc;che or cream cheese</li>
+          <li>1 tbsp olive oil</li>
+          <li>Handful of parsley (optional)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook rice according to packet.</li><li>Heat sesame oil in a wok. Fry tofu cubes until golden on all sides (5 min).</li><li>Add garlic, carrot, peas, and sweetcorn. Stir-fry 3-4 min.</li><li>Add soy sauce, toss with rice, and serve.</li></ol>
+        <ol>
+          <li>Cook pasta according to packet. Add peas for the last 3 minutes.</li>
+          <li>Meanwhile, fry diced chicken in olive oil until cooked through (8-10 min).</li>
+          <li>Drain pasta and peas. Stir in chicken, cr&egrave;me fra&icirc;che, and parsley.</li>
+          <li>Serve warm. Stores well in the fridge for next day's lunch.</li>
+        </ol>
+        <div class="toddler-note">Cut pasta short with scissors. Use mild seasoning only, no salt needed.</div>
+      </div>
+    </div>
+
+    <div class="recipe-card cat-chicken">
+      <div class="recipe-header" onclick="toggleCard(this)">
+        <span class="recipe-title">Chicken & Vegetable Stir-Fry with Rice</span>
+        <div class="recipe-meta"><span>25 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
+      </div>
+      <div class="recipe-details">
+        <h4>Ingredients</h4>
+        <ul>
+          <li>2 chicken breasts, sliced thin</li>
+          <li>1 carrot, cut into thin sticks</li>
+          <li>1 pepper, sliced</li>
+          <li>100g broccoli florets</li>
+          <li>2 tbsp low-salt soy sauce</li>
+          <li>1 tbsp sesame oil</li>
+          <li>Rice to serve</li>
+        </ul>
+        <h4>Instructions</h4>
+        <ol>
+          <li>Cook rice according to packet.</li>
+          <li>Heat sesame oil in a wok or large pan. Stir-fry chicken 5-6 min until golden.</li>
+          <li>Add vegetables and stir-fry another 4-5 min until tender-crisp.</li>
+          <li>Add soy sauce, toss, and serve over rice.</li>
+        </ol>
+        <div class="toddler-note">Chop vegetables and chicken into small pieces for the toddler. Use reduced-salt soy sauce.</div>
+      </div>
+    </div>
+
+    <div class="recipe-card cat-chicken">
+      <div class="recipe-header" onclick="toggleCard(this)">
+        <span class="recipe-title">Chicken & Vegetable Soup</span>
+        <div class="recipe-meta"><span>30 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+      </div>
+      <div class="recipe-details">
+        <h4>Ingredients</h4>
+        <ul>
+          <li>2 chicken breasts</li>
+          <li>1 onion, diced</li>
+          <li>2 carrots, diced</li>
+          <li>2 potatoes, cubed</li>
+          <li>100g sweetcorn</li>
+          <li>800ml low-salt chicken stock</li>
+          <li>1 tbsp olive oil</li>
+        </ul>
+        <h4>Instructions</h4>
+        <ol>
+          <li>Heat oil, soften onion for 3 min. Add carrots and potatoes, cook 2 min.</li>
+          <li>Add stock and whole chicken breasts. Simmer 15 min until chicken is cooked.</li>
+          <li>Remove chicken, shred with two forks, return to pot with sweetcorn.</li>
+          <li>Simmer 5 more min. Serve with crusty bread.</li>
+        </ol>
+        <div class="toddler-note">Mash or blend part of the soup for a smoother texture if preferred. Great batch-cook meal.</div>
       </div>
     </div>
   </div>
@@ -323,53 +393,106 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2-3 unsalted rice cakes</li><li>1/2 ripe avocado</li><li>Squeeze of lemon (optional)</li></ul>
+        <ul>
+          <li>2-3 unsalted rice cakes</li>
+          <li>1/2 ripe avocado</li>
+          <li>Squeeze of lemon (optional)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Mash avocado with a fork, add a tiny squeeze of lemon.</li><li>Spread on rice cakes. Break into manageable pieces for the toddler.</li></ol>
+        <ol>
+          <li>Mash avocado with a fork, add a tiny squeeze of lemon.</li>
+          <li>Spread on rice cakes. Break into manageable pieces for the toddler.</li>
+        </ol>
         <div class="toddler-note">Avocado is rich in healthy fats. Break rice cakes into small pieces to avoid choking.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Dinner &mdash; Fish</div>
-    <div class="recipe-card cat-fish">
+    <div class="meal-section-title">Dinner &mdash; Legumes / Lentils</div>
+
+    <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Salmon & Broccoli Pasta</span>
-        <div class="recipe-meta"><span>30 min</span><span>Fridge: 1-2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Red Lentil Dhal with Rice</span>
+        <div class="recipe-meta"><span>30 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 salmon fillets</li><li>300g pasta</li><li>200g broccoli florets</li><li>100g frozen peas</li><li>3 tbsp cream cheese</li><li>Zest of 1 lemon</li></ul>
+        <ul>
+          <li>200g red split lentils, rinsed</li>
+          <li>1 onion, finely diced</li>
+          <li>2 garlic cloves, minced</li>
+          <li>400ml tin coconut milk or 500ml water</li>
+          <li>1 tsp turmeric, 1 tsp cumin</li>
+          <li>1 tbsp rapeseed or olive oil</li>
+          <li>Rice to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook pasta. Add broccoli and peas for the last 4 min.</li><li>Bake or pan-fry salmon (10-12 min).</li><li>Drain pasta and veg. Stir in cream cheese and lemon zest.</li><li>Flake salmon over pasta and mix gently.</li></ol>
-        <div class="toddler-note">Check salmon carefully for bones. Flake into small pieces. Excellent omega-3 DHA source for brain development.</div>
+        <ol>
+          <li>Heat oil, soften onion and garlic for 3 min.</li>
+          <li>Add lentils, spices, and liquid. Bring to boil, then simmer 20 min, stirring occasionally.</li>
+          <li>Lentils will break down into a thick, creamy dhal. Add water if too thick.</li>
+          <li>Serve over rice with a squeeze of lemon.</li>
+        </ol>
+        <div class="toddler-note">Naturally soft texture, perfect for toddlers. Skip chilli. Good iron source &mdash; serve with vitamin C (lemon or tomato) to boost absorption.</div>
       </div>
     </div>
-    <div class="recipe-card cat-fish">
+
+    <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Fish Pie</span>
-        <div class="recipe-meta"><span>60 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Chickpea Fritters with Yogurt Dip</span>
+        <div class="recipe-meta"><span>18 min</span><span>Fridge: 5 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>400g white fish (cod, pollock, or coley)</li><li>4 potatoes, peeled and cubed</li><li>300ml milk</li><li>2 tbsp flour</li><li>Knob of butter</li><li>100g frozen peas</li><li>50g cheese, grated</li></ul>
+        <ul>
+          <li>1 x 400g tin chickpeas, drained and rinsed</li>
+          <li>3 tbsp plain flour</li>
+          <li>3 tbsp grated Parmesan cheese</li>
+          <li>1 tsp cumin</li>
+          <li>1/2 tsp garlic powder</li>
+          <li>2 tbsp water</li>
+          <li>2 tbsp olive oil</li>
+          <li>Plain yogurt and cucumber for dipping</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Boil potatoes 15 min. Mash with butter and splash of milk.</li><li>Poach fish in milk for 8 min. Remove fish, keep the milk.</li><li>Make white sauce: melt butter, stir in flour, gradually add poaching milk until thick.</li><li>Flake fish into oven dish. Add peas and sauce. Top with mash and cheese. Bake at 200&deg;C for 20 min.</li></ol>
-        <div class="toddler-note">Check carefully for bones. Soft, creamy texture is ideal for toddlers. Make two and freeze one.</div>
+        <ol>
+          <li>Place chickpeas in a bowl with flour, Parmesan, cumin, garlic powder, and water.</li>
+          <li>Mash with a potato masher until mostly smooth (some texture is fine).</li>
+          <li>Shape into small flat patties, about 1 tbsp each.</li>
+          <li>Heat olive oil in a pan over medium heat. Cook patties 2&ndash;3 min per side until golden.</li>
+          <li>Serve with yogurt dip and steamed vegetables or salad on the side.</li>
+        </ol>
+        <div class="toddler-note">Soft inside, easy to hold &mdash; perfect finger food. Spread yogurt thinly for dipping. Store leftovers up to 5 days in the fridge, or freeze.</div>
       </div>
     </div>
-    <div class="recipe-card cat-fish">
+
+    <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Cod in Tomato Sauce with Rice</span>
-        <div class="recipe-meta"><span>25 min</span><span>Fridge: 1-2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Quick Chickpea &amp; Spinach Pasta</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 cod fillets (or any white fish)</li><li>1 tin chopped tomatoes</li><li>1 onion, diced</li><li>1 garlic clove, minced</li><li>1 tsp paprika</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>250g pasta (penne or fusilli)</li>
+          <li>1 x 400g tin chickpeas, drained</li>
+          <li>1 x 400g tin chopped tomatoes</li>
+          <li>2 handfuls of spinach</li>
+          <li>2 tbsp cream cheese</li>
+          <li>1 garlic clove, minced</li>
+          <li>1 tbsp olive oil</li>
+          <li>Grated Parmesan to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook rice. Soften onion and garlic.</li><li>Add tomatoes and paprika. Simmer 10 min.</li><li>Nestle fish into the sauce. Cover and cook 10-12 min until fish flakes.</li><li>Serve fish and sauce over rice.</li></ol>
-        <div class="toddler-note">Flake fish carefully. Tomato sauce adds vitamin C which helps iron absorption.</div>
+        <ol>
+          <li>Cook pasta according to packet instructions.</li>
+          <li>Meanwhile, heat olive oil in a pan. Add garlic, cook 1 min. Add chickpeas and tomatoes.</li>
+          <li>Simmer 8&ndash;10 min. Mash some chickpeas with a fork for a thicker sauce.</li>
+          <li>Stir in spinach until wilted. Add cream cheese and stir until creamy.</li>
+          <li>Drain pasta and toss with the sauce. Serve with Parmesan.</li>
+        </ol>
+        <div class="toddler-note">Mashed chickpeas make a smooth, mild sauce. Cut pasta short with scissors. Spinach hides well in the tomato sauce.</div>
       </div>
     </div>
   </div>
@@ -380,11 +503,10 @@
   <div class="day-header">
     <h2>Tuesday</h2>
     <div class="protein-badges">
-      <span class="protein-badge badge-legumes">Legumes</span>
       <span class="protein-badge badge-fish">Fish</span>
+      <span class="protein-badge badge-eggs">Eggs</span>
     </div>
   </div>
-  <div class="batch-note"><strong>Leftovers day!</strong> Enjoy Monday's lunch and dinner from the fridge. Or pick a fresh option below.</div>
 
   <div class="meal-section">
     <div class="meal-section-title">Morning Snack</div>
@@ -395,50 +517,95 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Plain full-fat yogurt</li><li>Handful of blueberries, strawberries, or raspberries</li></ul>
+        <ul>
+          <li>Plain full-fat yogurt</li>
+          <li>Handful of blueberries, strawberries, or raspberries</li>
+          <li>Drizzle of honey (optional, for adults)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Spoon yogurt into bowls. Top with berries.</li></ol>
-        <div class="toddler-note">Cut strawberries into quarters. Halve blueberries for under-3s. Use full-fat yogurt until age 2.</div>
+        <ol>
+          <li>Spoon yogurt into bowls. Top with berries.</li>
+          <li>Adults can add a drizzle of honey if desired.</li>
+        </ol>
+        <div class="toddler-note">Cut strawberries into quarters. Blueberries should be halved or squashed for under-3s. Use full-fat yogurt until age 2.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Lunch &mdash; Legumes (adults, daughter at school)</div>
-    <div class="recipe-card cat-legumes">
+    <div class="meal-section-title">Lunch &mdash; Fish</div>
+
+    <div class="recipe-card cat-fish">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Red Lentil Dhal with Rice</span>
-        <div class="recipe-meta"><span>Monday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Salmon & Broccoli Pasta</span>
+        <div class="recipe-meta"><span>30 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>200g red split lentils, rinsed</li><li>1 onion, finely diced</li><li>2 garlic cloves, minced</li><li>400ml coconut milk or 500ml water</li><li>1 tsp turmeric, 1 tsp cumin</li><li>1 tbsp olive oil</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>2 salmon fillets</li>
+          <li>300g pasta</li>
+          <li>200g broccoli, cut into small florets</li>
+          <li>100g frozen peas</li>
+          <li>3 tbsp cream cheese or soft cheese</li>
+          <li>Zest of 1 lemon</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Heat oil, soften onion and garlic for 3 min.</li><li>Add lentils, spices, and liquid. Bring to boil, then simmer 20 min.</li><li>Lentils break down into a thick, creamy dhal. Add water if too thick.</li><li>Serve over rice with a squeeze of lemon.</li></ol>
+        <ol>
+          <li>Cook pasta according to packet. Add broccoli and peas for the last 4 min.</li>
+          <li>Meanwhile, bake or pan-fry salmon fillets (10-12 min).</li>
+          <li>Drain pasta and veg. Stir in cream cheese and lemon zest.</li>
+          <li>Flake salmon over the pasta and mix gently.</li>
+        </ol>
+        <div class="toddler-note">Check salmon carefully for bones. Flake into small pieces. Salmon is an excellent source of omega-3 (DHA) for brain development.</div>
       </div>
     </div>
-    <div class="recipe-card cat-legumes">
+
+    <div class="recipe-card cat-fish">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Chickpea & Sweet Potato Curry</span>
-        <div class="recipe-meta"><span>Monday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Tuna Mayo Jacket Potato</span>
+        <div class="recipe-meta"><span>15 min prep</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>1 tin chickpeas, drained</li><li>2 sweet potatoes, peeled and cubed</li><li>1 tin chopped tomatoes</li><li>1 onion, diced</li><li>200ml coconut milk</li><li>2 tsp mild curry powder</li><li>Handful of spinach</li><li>Rice or flatbread to serve</li></ul>
+        <ul>
+          <li>Baking potatoes (1 per adult, 1/2 per toddler)</li>
+          <li>1 tin tuna in spring water, drained</li>
+          <li>3 tbsp natural yogurt or low-salt mayo</li>
+          <li>50g sweetcorn</li>
+          <li>Cucumber, diced</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Soften onion in oil for 3 min. Add curry powder, cook 1 min.</li><li>Add sweet potato, tomatoes, and coconut milk. Simmer 20 min.</li><li>Stir in chickpeas and spinach. Cook 5 more min.</li><li>Serve with rice or warm flatbread.</li></ol>
+        <ol>
+          <li>Bake potatoes at 200&deg;C for 50-60 min, or microwave 8-10 min.</li>
+          <li>Mix tuna, yogurt/mayo, sweetcorn, and cucumber.</li>
+          <li>Split potatoes, top with tuna mix.</li>
+        </ol>
+        <div class="toddler-note">Mash potato flesh with the tuna filling for easier eating. Tuna is a good low-mercury fish choice (use light tuna).</div>
       </div>
     </div>
-    <div class="recipe-card cat-legumes">
+
+    <div class="recipe-card cat-fish">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Rice Bowl with Tofu, Corn, Peas & Carrots</span>
-        <div class="recipe-meta"><span>Monday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Fish Fingers with Sweet Potato Wedges & Peas</span>
+        <div class="recipe-meta"><span>30 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>300g firm tofu, cubed</li><li>250g rice</li><li>100g sweetcorn</li><li>100g frozen peas</li><li>1 large carrot, diced small</li><li>2 tbsp low-salt soy sauce</li><li>1 tbsp sesame oil</li><li>1 garlic clove, minced</li></ul>
+        <ul>
+          <li>White fish fillets (cod or pollock), cut into strips</li>
+          <li>Wholemeal breadcrumbs</li>
+          <li>1 egg, beaten</li>
+          <li>2 sweet potatoes, cut into wedges</li>
+          <li>Frozen peas</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook rice according to packet.</li><li>Heat sesame oil in a wok. Fry tofu until golden (5 min).</li><li>Add garlic, carrot, peas, and sweetcorn. Stir-fry 3-4 min.</li><li>Add soy sauce, toss with rice, and serve.</li></ol>
+        <ol>
+          <li>Toss sweet potato wedges in a little oil, bake at 200&deg;C for 20 min.</li>
+          <li>Dip fish strips in egg, then breadcrumbs. Bake alongside for 12-15 min.</li>
+          <li>Boil peas for 3 min. Serve together.</li>
+        </ol>
+        <div class="toddler-note">Homemade fish fingers have no added salt. Cut into small pieces for the toddler.</div>
       </div>
     </div>
   </div>
@@ -452,53 +619,103 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Full-fat cottage cheese</li><li>Soft fruit: peach, pear, or mango, chopped</li></ul>
+        <ul>
+          <li>Full-fat cottage cheese</li>
+          <li>Soft fruit: peach, pear, or mango, chopped</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Spoon cottage cheese into bowls. Top with chopped fruit.</li></ol>
+        <ol>
+          <li>Spoon cottage cheese into bowls. Top with chopped fruit.</li>
+          <li>For toddler, use ripe soft fruit cut into small pieces.</li>
+        </ol>
         <div class="toddler-note">Good calcium source. Use full-fat cottage cheese for under-2s.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Dinner &mdash; Fish</div>
-    <div class="recipe-card cat-fish">
+    <div class="meal-section-title">Dinner &mdash; Eggs</div>
+
+    <div class="recipe-card cat-eggs">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Salmon & Broccoli Pasta</span>
-        <div class="recipe-meta"><span>Monday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Cheesy Veggie Scrambled Eggs on Toast</span>
+        <div class="recipe-meta"><span>10 min</span><span>Best fresh</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 salmon fillets</li><li>300g pasta</li><li>200g broccoli florets</li><li>100g frozen peas</li><li>3 tbsp cream cheese</li><li>Zest of 1 lemon</li></ul>
+        <ul>
+          <li>6 eggs</li>
+          <li>50g cheese, grated (cheddar or mild)</li>
+          <li>1 small pepper, finely diced</li>
+          <li>3 mushrooms, finely diced</li>
+          <li>Handful of spinach, chopped</li>
+          <li>Knob of butter</li>
+          <li>Splash of milk</li>
+          <li>3&ndash;4 slices wholemeal bread</li>
+          <li>Cherry tomatoes, halved (to serve)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook pasta. Add broccoli and peas for the last 4 min.</li><li>Bake or pan-fry salmon (10-12 min).</li><li>Drain pasta and veg. Stir in cream cheese and lemon zest.</li><li>Flake salmon over pasta and mix gently.</li></ol>
-        <div class="toddler-note">Check salmon carefully for bones. Flake into small pieces.</div>
+        <ol>
+          <li>Beat eggs with milk in a bowl.</li>
+          <li>Melt butter in a non-stick pan over medium heat. Add pepper and mushrooms, cook 2 min until soft.</li>
+          <li>Pour in eggs. Stir gently with a spatula, folding from the edges.</li>
+          <li>When eggs are almost set (about 3 min), fold in spinach and cheese. Cook 1 more min.</li>
+          <li>Toast bread and cut into fingers. Serve eggs on toast with tomatoes on the side.</li>
+        </ol>
+        <div class="toddler-note">Soft, creamy texture is easy for toddlers. Cut toast into finger strips. Use mild cheese only. Scrambled eggs are one of the easiest proteins for toddlers to eat.</div>
       </div>
     </div>
-    <div class="recipe-card cat-fish">
+
+    <div class="recipe-card cat-eggs">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Fish Pie</span>
-        <div class="recipe-meta"><span>Monday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Vegetable Frittata</span>
+        <div class="recipe-meta"><span>25 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>400g white fish (cod, pollock, or coley)</li><li>4 potatoes</li><li>300ml milk</li><li>2 tbsp flour</li><li>Knob of butter</li><li>100g frozen peas</li><li>50g cheese, grated</li></ul>
+        <ul>
+          <li>6 eggs</li>
+          <li>1 courgette, diced</li>
+          <li>100g cherry tomatoes, halved</li>
+          <li>50g cheese, grated</li>
+          <li>100g frozen peas or sweetcorn</li>
+          <li>Splash of milk</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Boil potatoes 15 min. Mash with butter and splash of milk.</li><li>Poach fish in milk for 8 min. Remove fish, keep the milk.</li><li>Make white sauce: melt butter, stir in flour, gradually add poaching milk until thick.</li><li>Flake fish into oven dish. Add peas and sauce. Top with mash and cheese. Bake at 200&deg;C for 20 min.</li></ol>
-        <div class="toddler-note">Check carefully for bones. Soft, creamy texture is ideal for toddlers.</div>
+        <ol>
+          <li>Preheat grill. Fry courgette in an ovenproof pan for 3 min.</li>
+          <li>Beat eggs with milk. Pour over veg, add tomatoes and peas.</li>
+          <li>Cook on medium heat 8 min until almost set. Sprinkle cheese on top.</li>
+          <li>Grill for 3-4 min until golden and set. Cut into wedges.</li>
+        </ol>
+        <div class="toddler-note">Cut into finger-sized wedges. Good hot or cold &mdash; perfect for next-day lunch too.</div>
       </div>
     </div>
-    <div class="recipe-card cat-fish">
+
+    <div class="recipe-card cat-eggs">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Cod in Tomato Sauce with Rice</span>
-        <div class="recipe-meta"><span>Monday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Egg Fried Rice with Vegetables</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 cod fillets</li><li>1 tin chopped tomatoes</li><li>1 onion, diced</li><li>1 garlic clove, minced</li><li>1 tsp paprika</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>250g cooked rice (ideally leftover, cold)</li>
+          <li>3 eggs, beaten</li>
+          <li>100g frozen peas</li>
+          <li>1 carrot, finely diced</li>
+          <li>2 spring onions, sliced</li>
+          <li>1 tbsp low-salt soy sauce</li>
+          <li>1 tbsp sesame oil</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook rice. Soften onion and garlic.</li><li>Add tomatoes and paprika. Simmer 10 min.</li><li>Nestle fish into the sauce. Cover and cook 10-12 min.</li><li>Serve fish and sauce over rice.</li></ol>
-        <div class="toddler-note">Flake fish carefully. Tomato sauce adds vitamin C which helps iron absorption.</div>
+        <ol>
+          <li>Heat sesame oil in a wok. Fry carrot and peas for 3 min.</li>
+          <li>Push veg to the side, scramble eggs in the pan.</li>
+          <li>Add cold rice and soy sauce. Toss everything together on high heat for 3-4 min.</li>
+          <li>Garnish with spring onions. Serve immediately.</li>
+        </ol>
+        <div class="toddler-note">Use reduced-salt soy sauce. Chop everything small. Make sure rice is piping hot when reheating.</div>
       </div>
     </div>
   </div>
@@ -509,11 +726,10 @@
   <div class="day-header">
     <h2>Wednesday</h2>
     <div class="protein-badges">
-      <span class="protein-badge badge-legumes">Legumes</span>
-      <span class="protein-badge badge-eggs">Eggs</span>
+      <span class="protein-badge badge-legumes">Legumes/Tofu</span>
+      <span class="protein-badge badge-chicken">Chicken</span>
     </div>
   </div>
-  <div class="batch-note"><strong>Batch cook day!</strong> Cook extra for both lunch and dinner &mdash; Thursday uses the same meals from the fridge.</div>
 
   <div class="meal-section">
     <div class="meal-section-title">Morning Snack</div>
@@ -524,16 +740,23 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Eggs (1 per person)</li><li>Wholemeal bread, buttered and cut into fingers</li></ul>
+        <ul>
+          <li>Eggs (1 per person)</li>
+          <li>Wholemeal bread, buttered and cut into fingers</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Boil eggs for 10 min (hard-boiled). Cool under cold water.</li><li>Peel and slice or quarter. Serve with bread fingers.</li></ol>
-        <div class="toddler-note">Batch-boil eggs at the start of the week &mdash; they keep 5 days in the fridge. Cut into small pieces. Good iron source.</div>
+        <ol>
+          <li>Boil eggs for 10 min (hard-boiled). Cool under cold water.</li>
+          <li>Peel and slice or quarter. Serve with bread fingers.</li>
+        </ol>
+        <div class="toddler-note">Batch-boil eggs at the start of the week &mdash; they keep 5 days in the fridge. Cut into small pieces for the toddler. Good iron source.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Lunch &mdash; Legumes (adults, daughter at school)</div>
+    <div class="meal-section-title">Lunch &mdash; Legumes / Tofu</div>
+
     <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
         <span class="recipe-title">Creamy Lentil & Broccoli Pasta</span>
@@ -541,23 +764,50 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>100g red lentils</li><li>200g broccoli, chopped small</li><li>1 tin chopped tomatoes</li><li>1 onion, diced</li><li>2 garlic cloves, minced</li><li>2 tbsp cream cheese</li><li>300g pasta</li></ul>
+        <ul>
+          <li>100g red lentils</li>
+          <li>200g broccoli, chopped small</li>
+          <li>1 tin chopped tomatoes</li>
+          <li>1 onion, diced</li>
+          <li>2 garlic cloves, minced</li>
+          <li>2 tbsp cream cheese</li>
+          <li>300g pasta</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook pasta according to packet.</li><li>Soften onion and garlic. Add lentils, tomatoes, and 200ml water. Simmer 15 min.</li><li>Add broccoli for the last 5 min. Stir in cream cheese.</li><li>Mix sauce with drained pasta. Freezes well in portions.</li></ol>
+        <ol>
+          <li>Cook pasta according to packet.</li>
+          <li>Soften onion and garlic. Add lentils, tomatoes, and 200ml water. Simmer 15 min.</li>
+          <li>Add broccoli for the last 5 min. Stir in cream cheese.</li>
+          <li>Mix sauce with drained pasta. Freezes well in portions.</li>
+        </ol>
+        <div class="toddler-note">NHS-recommended toddler recipe. Sauce freezes brilliantly &mdash; make double and freeze half.</div>
       </div>
     </div>
+
     <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
         <span class="recipe-title">Black Bean Quesadillas</span>
-        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1-2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>1 tin black beans, drained and lightly mashed</li><li>100g cheese, grated</li><li>4 flour tortillas</li><li>1/2 avocado, sliced (optional)</li><li>50g sweetcorn</li></ul>
+        <ul>
+          <li>1 tin black beans, drained and lightly mashed</li>
+          <li>100g cheese, grated</li>
+          <li>4 flour tortillas</li>
+          <li>1/2 avocado, sliced (optional)</li>
+          <li>50g sweetcorn</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Spread mashed beans on one half of each tortilla. Add cheese and sweetcorn.</li><li>Fold in half. Dry-fry 2-3 min per side until crispy and cheese melts.</li><li>Cut into triangles. Serve with avocado slices.</li></ol>
+        <ol>
+          <li>Spread mashed beans on one half of each tortilla. Add cheese and sweetcorn.</li>
+          <li>Fold tortillas in half. Dry-fry in a pan 2-3 min per side until crispy and cheese melts.</li>
+          <li>Cut into triangles. Serve with avocado slices.</li>
+        </ol>
+        <div class="toddler-note">Cut into small triangles. Beans provide a soft, easy-to-eat filling. Great finger food.</div>
       </div>
     </div>
+
     <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
         <span class="recipe-title">Tofu & Vegetable Curry</span>
@@ -565,9 +815,23 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>300g firm tofu, cubed</li><li>1 tin coconut milk</li><li>1 tin chopped tomatoes</li><li>1 pepper, diced</li><li>100g green beans</li><li>2 tsp mild curry paste</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>300g firm tofu, cubed</li>
+          <li>1 tin coconut milk</li>
+          <li>1 tin chopped tomatoes</li>
+          <li>1 pepper, diced</li>
+          <li>100g green beans, trimmed</li>
+          <li>2 tsp mild curry paste</li>
+          <li>Rice to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Fry tofu until golden on all sides (5 min). Set aside.</li><li>Cook curry paste 1 min. Add tomatoes and coconut milk.</li><li>Add pepper and green beans. Simmer 10 min.</li><li>Return tofu. Simmer 5 more min. Serve with rice.</li></ol>
+        <ol>
+          <li>Fry tofu cubes in a little oil until golden on all sides (5 min). Set aside.</li>
+          <li>In the same pan, cook curry paste 1 min. Add tomatoes and coconut milk.</li>
+          <li>Add pepper and green beans. Simmer 10 min.</li>
+          <li>Return tofu to pan. Simmer 5 more min. Serve with rice.</li>
+        </ol>
+        <div class="toddler-note">Use mild curry paste only. Cut tofu and green beans small. Tofu is a good plant-based protein and calcium source.</div>
       </div>
     </div>
   </div>
@@ -581,53 +845,106 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>6 eggs</li><li>50g cheese, grated</li><li>Diced veg: peppers, courgette, spinach, sweetcorn</li><li>Splash of milk</li></ul>
+        <ul>
+          <li>6 eggs</li>
+          <li>50g cheese, grated</li>
+          <li>Diced vegetables: peppers, courgette, spinach, sweetcorn</li>
+          <li>Splash of milk</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Preheat oven to 180&deg;C. Grease a 12-hole muffin tin.</li><li>Beat eggs with milk. Stir in veg and cheese.</li><li>Pour into muffin tin. Bake 15-18 min until puffed and set.</li><li>Cool on a rack. Store in fridge up to 4 days, or freeze 2 months.</li></ol>
-        <div class="toddler-note">Make a batch and use all week. Perfect size for small hands.</div>
+        <ol>
+          <li>Preheat oven to 180&deg;C. Grease a 12-hole muffin tin.</li>
+          <li>Beat eggs with milk. Stir in veg and cheese.</li>
+          <li>Pour into muffin tin. Bake 15-18 min until puffed and set.</li>
+          <li>Cool on a rack. Store in fridge up to 4 days, or freeze for 2 months.</li>
+        </ol>
+        <div class="toddler-note">Make a batch on Sunday evening and use all week. Great grab-and-go snack. Perfect size for small hands.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Dinner &mdash; Eggs</div>
-    <div class="recipe-card cat-eggs">
+    <div class="meal-section-title">Dinner &mdash; Chicken</div>
+
+    <div class="recipe-card cat-chicken">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Shakshuka (Baked Eggs in Tomato Sauce)</span>
-        <div class="recipe-meta"><span>35 min</span><span>Sauce: 2 days</span><span class="toggle-icon">&#9654;</span></div>
-      </div>
-      <div class="recipe-details">
-        <h4>Ingredients</h4>
-        <ul><li>4-6 eggs</li><li>1 tin chopped tomatoes</li><li>1 tin chickpeas, drained (optional)</li><li>1 pepper, diced</li><li>1 onion, diced</li><li>2 garlic cloves, minced</li><li>1 tsp cumin, 1 tsp paprika</li><li>Handful of spinach</li><li>Crusty bread to serve</li></ul>
-        <h4>Instructions</h4>
-        <ol><li>Soften onion, pepper, and garlic for 5 min. Add spices, cook 1 min.</li><li>Add tomatoes and chickpeas. Simmer 15 min until thick.</li><li>Stir in spinach. Make wells, crack in eggs.</li><li>Cover and cook 8-10 min until eggs are set. Serve with bread.</li></ol>
-        <div class="toddler-note">Skip chilli for the toddler. Bread fingers for dipping. Store the sauce &mdash; cook fresh eggs when reheating.</div>
-      </div>
-    </div>
-    <div class="recipe-card cat-eggs">
-      <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Vegetable Frittata</span>
-        <div class="recipe-meta"><span>25 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
-      </div>
-      <div class="recipe-details">
-        <h4>Ingredients</h4>
-        <ul><li>6 eggs</li><li>1 courgette, diced</li><li>100g cherry tomatoes, halved</li><li>50g cheese, grated</li><li>100g frozen peas or sweetcorn</li><li>Splash of milk</li></ul>
-        <h4>Instructions</h4>
-        <ol><li>Preheat grill. Fry courgette in an ovenproof pan for 3 min.</li><li>Beat eggs with milk. Pour over veg, add tomatoes and peas.</li><li>Cook on medium 8 min until almost set. Sprinkle cheese.</li><li>Grill 3-4 min until golden. Cut into wedges.</li></ol>
-        <div class="toddler-note">Cut into finger-sized wedges. Good hot or cold &mdash; perfect for next-day lunch too.</div>
-      </div>
-    </div>
-    <div class="recipe-card cat-eggs">
-      <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Egg Fried Rice with Vegetables</span>
+        <span class="recipe-title">Chicken Quesadillas</span>
         <div class="recipe-meta"><span>20 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>250g cooked rice (ideally leftover, cold)</li><li>3 eggs, beaten</li><li>100g frozen peas</li><li>1 carrot, finely diced</li><li>2 spring onions, sliced</li><li>1 tbsp low-salt soy sauce</li><li>1 tbsp sesame oil</li></ul>
+        <ul>
+          <li>2 chicken breasts, diced small</li>
+          <li>200g tinned sweetcorn, drained</li>
+          <li>100g cheese, grated (mozzarella or cheddar)</li>
+          <li>4 large flour tortillas</li>
+          <li>1 tsp mild paprika</li>
+          <li>1 tbsp sunflower or olive oil</li>
+          <li>Avocado slices and yogurt to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Heat sesame oil in a wok. Fry carrot and peas for 3 min.</li><li>Push veg to the side, scramble eggs in the pan.</li><li>Add cold rice and soy sauce. Toss on high heat 3-4 min.</li><li>Garnish with spring onions.</li></ol>
-        <div class="toddler-note">Use reduced-salt soy sauce. Chop everything small. Ensure rice is piping hot when reheating.</div>
+        <ol>
+          <li>Heat half the oil in a pan. Fry diced chicken with paprika for 5&ndash;6 min until cooked through. Set aside.</li>
+          <li>Mix chicken with sweetcorn in a bowl.</li>
+          <li>Place one tortilla in the pan. Sprinkle cheese, add chicken mixture, more cheese, top with second tortilla.</li>
+          <li>Cook 2&ndash;3 min per side until golden and cheese melts. Press down gently with a spatula.</li>
+          <li>Cut into small triangles. Serve with avocado and yogurt for dipping.</li>
+        </ol>
+        <div class="toddler-note">Cut into small triangles for little hands. The melted cheese holds everything together, making it easy finger food. Use mild seasoning only.</div>
+      </div>
+    </div>
+
+    <div class="recipe-card cat-chicken">
+      <div class="recipe-header" onclick="toggleCard(this)">
+        <span class="recipe-title">Chicken Fajitas</span>
+        <div class="recipe-meta"><span>25 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
+      </div>
+      <div class="recipe-details">
+        <h4>Ingredients</h4>
+        <ul>
+          <li>2 chicken breasts, sliced into strips</li>
+          <li>2 peppers, sliced</li>
+          <li>1 onion, sliced</li>
+          <li>1 tsp smoked paprika, 1 tsp cumin</li>
+          <li>Tortillas or pitta bread</li>
+          <li>Toppings: grated cheese, yogurt, avocado</li>
+        </ul>
+        <h4>Instructions</h4>
+        <ol>
+          <li>Toss chicken with spices. Fry in a hot pan 5-6 min.</li>
+          <li>Add peppers and onion, cook 5 more min until softened.</li>
+          <li>Warm tortillas. Load with chicken, veg, and toppings.</li>
+        </ol>
+        <div class="toddler-note">Serve deconstructed on the plate for the toddler. Shred chicken finely. Mild spices only &mdash; skip chilli.</div>
+      </div>
+    </div>
+
+    <div class="recipe-card cat-chicken">
+      <div class="recipe-header" onclick="toggleCard(this)">
+        <span class="recipe-title">Chicken &amp; Veg Noodle Stir-Fry</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
+      </div>
+      <div class="recipe-details">
+        <h4>Ingredients</h4>
+        <ul>
+          <li>2 chicken breasts, sliced thin</li>
+          <li>200g egg noodles</li>
+          <li>1 carrot, cut into thin sticks</li>
+          <li>100g broccoli florets, chopped small</li>
+          <li>100g frozen peas</li>
+          <li>1 tbsp low-salt soy sauce</li>
+          <li>1 tbsp sesame oil</li>
+          <li>1 tsp honey</li>
+        </ul>
+        <h4>Instructions</h4>
+        <ol>
+          <li>Cook noodles according to packet. Drain and set aside.</li>
+          <li>Heat sesame oil in a wok or large pan. Stir-fry chicken 5&ndash;6 min until cooked through.</li>
+          <li>Add carrot and broccoli, stir-fry 3&ndash;4 min until tender-crisp.</li>
+          <li>Add peas, noodles, soy sauce, and honey. Toss everything together 2 min.</li>
+          <li>Serve immediately. Cut noodles with scissors for the toddler.</li>
+        </ol>
+        <div class="toddler-note">Cut noodles short. Chop broccoli and carrot very small. Use reduced-salt soy sauce. Honey is fine at 2.5 years old.</div>
       </div>
     </div>
   </div>
@@ -638,11 +955,10 @@
   <div class="day-header">
     <h2>Thursday</h2>
     <div class="protein-badges">
-      <span class="protein-badge badge-legumes">Legumes</span>
       <span class="protein-badge badge-eggs">Eggs</span>
+      <span class="protein-badge badge-beef">Beef</span>
     </div>
   </div>
-  <div class="batch-note"><strong>Leftovers day!</strong> Enjoy Wednesday's lunch and dinner from the fridge. Or pick a fresh option below.</div>
 
   <div class="meal-section">
     <div class="meal-section-title">Morning Snack</div>
@@ -653,50 +969,96 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Oatcakes (2-3 per person)</li><li>Cream cheese (full-fat for toddler)</li><li>Cucumber, cut into sticks</li></ul>
+        <ul>
+          <li>Oatcakes (2-3 per person)</li>
+          <li>Cream cheese (full-fat for toddler)</li>
+          <li>Cucumber, cut into sticks</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Spread cream cheese on oatcakes. Serve with cucumber sticks.</li></ol>
-        <div class="toddler-note">Break oatcakes into smaller pieces if too hard. Good calcium from cheese.</div>
+        <ol>
+          <li>Spread cream cheese on oatcakes. Serve with cucumber sticks.</li>
+        </ol>
+        <div class="toddler-note">Break oatcakes into smaller pieces if they're too hard for the toddler. Good calcium from cheese.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Lunch &mdash; Legumes (adults, daughter at school)</div>
-    <div class="recipe-card cat-legumes">
+    <div class="meal-section-title">Lunch &mdash; Eggs</div>
+
+    <div class="recipe-card cat-eggs">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Creamy Lentil & Broccoli Pasta</span>
-        <div class="recipe-meta"><span>Wednesday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Cheese & Vegetable Omelette</span>
+        <div class="recipe-meta"><span>15 min</span><span>Best fresh</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>100g red lentils</li><li>200g broccoli, chopped small</li><li>1 tin chopped tomatoes</li><li>1 onion, diced</li><li>2 garlic cloves, minced</li><li>2 tbsp cream cheese</li><li>300g pasta</li></ul>
+        <ul>
+          <li>3 eggs per adult, 1-2 per toddler</li>
+          <li>50g cheese, grated</li>
+          <li>Handful of spinach</li>
+          <li>3 mushrooms, sliced</li>
+          <li>1 tomato, diced</li>
+          <li>Bread or salad to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook pasta. Soften onion and garlic. Add lentils, tomatoes, 200ml water. Simmer 15 min.</li><li>Add broccoli last 5 min. Stir in cream cheese. Mix with pasta.</li></ol>
+        <ol>
+          <li>Beat eggs with a splash of milk. Fry mushrooms and spinach in butter for 2 min.</li>
+          <li>Pour in eggs, swirl to cover pan. Cook on medium 3-4 min.</li>
+          <li>Add tomato and cheese on one half. Fold over, cook 1 more min.</li>
+          <li>Serve with bread or salad.</li>
+        </ol>
+        <div class="toddler-note">Cut into strips for the toddler. Omelettes are a quick way to get iron (eggs) and calcium (cheese) together.</div>
       </div>
     </div>
-    <div class="recipe-card cat-legumes">
+
+    <div class="recipe-card cat-eggs">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Black Bean Quesadillas</span>
-        <div class="recipe-meta"><span>Wednesday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Egg & Avocado Toast</span>
+        <div class="recipe-meta"><span>10 min</span><span>Best fresh</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>1 tin black beans, mashed</li><li>100g cheese, grated</li><li>4 flour tortillas</li><li>50g sweetcorn</li></ul>
+        <ul>
+          <li>Wholemeal bread (1-2 slices per person)</li>
+          <li>Eggs (1 per person)</li>
+          <li>1 avocado</li>
+          <li>Cherry tomatoes, halved</li>
+          <li>Squeeze of lemon</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Spread beans on tortillas. Add cheese and sweetcorn.</li><li>Fold and dry-fry 2-3 min per side. Cut into triangles.</li></ol>
+        <ol>
+          <li>Toast bread. Mash avocado with lemon juice, spread on toast.</li>
+          <li>Fry or scramble eggs. Place on top of avocado toast.</li>
+          <li>Add halved cherry tomatoes on the side.</li>
+        </ol>
+        <div class="toddler-note">Scrambled eggs are easier for toddlers than fried. Cut toast into fingers. Cut tomatoes lengthwise (never whole rounds).</div>
       </div>
     </div>
-    <div class="recipe-card cat-legumes">
+
+    <div class="recipe-card cat-eggs">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Tofu & Vegetable Curry</span>
-        <div class="recipe-meta"><span>Wednesday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Mini Crustless Quiches</span>
+        <div class="recipe-meta"><span>30 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>300g firm tofu, cubed</li><li>1 tin coconut milk</li><li>1 tin chopped tomatoes</li><li>1 pepper, diced</li><li>100g green beans</li><li>2 tsp mild curry paste</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>6 eggs</li>
+          <li>100ml milk</li>
+          <li>80g cheese, grated</li>
+          <li>100g frozen peas</li>
+          <li>50g ham (optional, use reduced-salt)</li>
+          <li>1 tomato, diced</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Fry tofu until golden. Cook curry paste 1 min.</li><li>Add tomatoes, coconut milk, veg. Simmer 15 min.</li><li>Return tofu. Serve with rice.</li></ol>
+        <ol>
+          <li>Preheat oven to 180&deg;C. Grease a muffin tin.</li>
+          <li>Beat eggs with milk. Stir in cheese, peas, ham, and tomato.</li>
+          <li>Pour into muffin tin. Bake 18-20 min until set and golden.</li>
+          <li>Cool slightly. Eat warm or cold. Great for packed lunches.</li>
+        </ol>
+        <div class="toddler-note">Perfect finger food. Make a batch and keep in the fridge for quick meals all week.</div>
       </div>
     </div>
   </div>
@@ -710,53 +1072,107 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Unsalted breadsticks or crackers</li><li>Smooth almond or peanut butter</li></ul>
+        <ul>
+          <li>Unsalted breadsticks or crackers</li>
+          <li>Smooth almond or peanut butter</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Dip breadsticks into nut butter, or spread a thin layer.</li></ol>
-        <div class="toddler-note">Use smooth nut butter only. Spread thinly &mdash; never give a blob on a spoon (choking risk).</div>
+        <ol>
+          <li>Dip breadsticks into nut butter, or spread a thin layer.</li>
+        </ol>
+        <div class="toddler-note">Use smooth nut butter only (no chunks). Spread thinly &mdash; never give a blob on a spoon (choking risk).</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Dinner &mdash; Eggs</div>
-    <div class="recipe-card cat-eggs">
+    <div class="meal-section-title">Dinner &mdash; Beef</div>
+
+    <div class="recipe-card cat-beef">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Shakshuka (Baked Eggs in Tomato Sauce)</span>
-        <div class="recipe-meta"><span>Wed's sauce</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Sticky Beef Mince Stir-Fry with Rice</span>
+        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>4-6 eggs</li><li>Wednesday's leftover tomato sauce</li><li>Crusty bread to serve</li></ul>
+        <ul>
+          <li>400g lean beef mince</li>
+          <li>1 tsp sunflower oil</li>
+          <li>2 tsp garlic (minced or paste)</li>
+          <li>2 tsp ginger paste</li>
+          <li>150g green beans, trimmed and halved</li>
+          <li>1 tbsp cornflour</li>
+          <li>2 tbsp low-salt soy sauce</li>
+          <li>1 tbsp honey</li>
+          <li>100ml water</li>
+          <li>Rice to serve (microwave packet for speed)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Reheat Wednesday's sauce until simmering.</li><li>Make wells, crack in fresh eggs.</li><li>Cover and cook 8-10 min until eggs are set. Serve with bread.</li></ol>
-        <div class="toddler-note">Skip chilli for the toddler. Bread fingers for dipping.</div>
+        <ol>
+          <li>Heat oil in a large pan. Brown mince 5&ndash;7 min, breaking it up.</li>
+          <li>Add garlic, ginger, and green beans. Cook 4&ndash;5 min.</li>
+          <li>Mix cornflour with soy sauce until smooth, then add honey and water.</li>
+          <li>Pour sauce over mince, increase heat. Let bubble 2&ndash;3 min until glossy and thick.</li>
+          <li>Serve over rice.</li>
+        </ol>
+        <div class="toddler-note">Mince is easy for toddlers to chew. Cut green beans into small pieces. Use reduced-salt soy sauce. The sticky sauce coats everything, making it easy to eat with fingers or a spoon.</div>
       </div>
     </div>
-    <div class="recipe-card cat-eggs">
+
+    <div class="recipe-card cat-beef">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Vegetable Frittata</span>
-        <div class="recipe-meta"><span>Wed's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Cheesy Beef Quesadillas</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>6 eggs</li><li>1 courgette, diced</li><li>100g cherry tomatoes, halved</li><li>50g cheese, grated</li><li>100g frozen peas or sweetcorn</li><li>Splash of milk</li></ul>
+        <ul>
+          <li>300g lean beef mince</li>
+          <li>1 tsp cumin, 1 tsp paprika, 1/2 tsp garlic powder</li>
+          <li>1 tbsp tomato paste</li>
+          <li>100g tinned sweetcorn, drained</li>
+          <li>4 flour tortillas</li>
+          <li>150g cheese, grated (cheddar or mozzarella)</li>
+          <li>Yogurt and avocado to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Fry courgette 3 min. Beat eggs with milk, pour over veg.</li><li>Cook on medium 8 min. Add cheese, grill 3-4 min until golden.</li></ol>
-        <div class="toddler-note">Great hot or cold from the fridge. Cut into finger-sized wedges.</div>
+        <ol>
+          <li>Brown mince in a pan over medium-high heat for 4&ndash;5 min, breaking it up. Drain fat.</li>
+          <li>Add spices, tomato paste, and sweetcorn. Stir 2 min until combined and heated through.</li>
+          <li>Lay tortilla flat. Add cheese, beef mixture, more cheese. Fold in half.</li>
+          <li>Cook in a lightly oiled pan 2 min per side until golden and cheese melts.</li>
+          <li>Cut into small triangles. Serve with yogurt and avocado.</li>
+        </ol>
+        <div class="toddler-note">Cut into small triangles. The melted cheese holds the filling together well. Mild seasoning &mdash; skip chilli powder. The soft tortilla is easy for small mouths.</div>
       </div>
     </div>
-    <div class="recipe-card cat-eggs">
+
+    <div class="recipe-card cat-beef">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Egg Fried Rice with Vegetables</span>
-        <div class="recipe-meta"><span>Wed's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Beef &amp; Veggie Noodles</span>
+        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>250g cooked rice (cold)</li><li>3 eggs, beaten</li><li>100g frozen peas</li><li>1 carrot, finely diced</li><li>1 tbsp low-salt soy sauce</li><li>1 tbsp sesame oil</li></ul>
+        <ul>
+          <li>300g lean beef mince</li>
+          <li>200g egg noodles</li>
+          <li>1 carrot, grated</li>
+          <li>1 courgette, grated</li>
+          <li>100g frozen peas</li>
+          <li>2 tbsp low-salt soy sauce</li>
+          <li>1 tbsp sesame oil</li>
+          <li>1 tsp garlic paste</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Heat oil in wok. Fry carrot and peas 3 min.</li><li>Push aside, scramble eggs. Add rice and soy sauce, toss 3-4 min.</li></ol>
-        <div class="toddler-note">Use reduced-salt soy sauce. Ensure rice is piping hot when reheating.</div>
+        <ol>
+          <li>Cook noodles according to packet. Drain.</li>
+          <li>Heat sesame oil in a wok. Brown mince 5 min, breaking it up.</li>
+          <li>Add garlic, grated carrot, and courgette. Cook 3 min.</li>
+          <li>Add peas, drained noodles, and soy sauce. Toss 2 min on high heat.</li>
+          <li>Serve immediately. Cut noodles with scissors for the toddler.</li>
+        </ol>
+        <div class="toddler-note">Grated vegetables cook fast and melt into the noodles &mdash; great for fussy eaters. Cut noodles short. Use reduced-salt soy sauce.</div>
       </div>
     </div>
   </div>
@@ -767,11 +1183,10 @@
   <div class="day-header">
     <h2>Friday</h2>
     <div class="protein-badges">
-      <span class="protein-badge badge-legumes">Legumes</span>
-      <span class="protein-badge badge-chicken">Chicken</span>
+      <span class="protein-badge badge-legumes">Beans</span>
+      <span class="protein-badge badge-fish">Fish</span>
     </div>
   </div>
-  <div class="batch-note"><strong>Batch cook dinner!</strong> Cook extra chicken &mdash; Saturday's lunch uses the same meal from the fridge.</div>
 
   <div class="meal-section">
     <div class="meal-section-title">Morning Snack</div>
@@ -782,16 +1197,23 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Mild cheese (cheddar or Edam), cut into finger strips</li><li>1 apple, cored and sliced</li></ul>
+        <ul>
+          <li>Mild cheese (cheddar or Edam), cut into finger strips</li>
+          <li>1 apple, cored and sliced</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cut cheese into finger-sized strips. Slice apple thinly.</li></ol>
-        <div class="toddler-note">Good calcium + vitamin C combination. Cut apple into thin slices to reduce choking risk.</div>
+        <ol>
+          <li>Cut cheese into finger-sized strips. Slice apple thinly.</li>
+          <li>Serve together. Simple and satisfying.</li>
+        </ol>
+        <div class="toddler-note">Good calcium + vitamin C combination. Cut apple into thin slices (not chunks) to reduce choking risk.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Lunch &mdash; Legumes (adults, daughter at school)</div>
+    <div class="meal-section-title">Lunch &mdash; Beans / Legumes</div>
+
     <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
         <span class="recipe-title">Minestrone Soup with Cannellini Beans</span>
@@ -799,23 +1221,27 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>1 tin cannellini beans, drained</li><li>1 tin chopped tomatoes</li><li>100g small pasta (orzo or ditalini)</li><li>1 carrot, diced</li><li>1 courgette, diced</li><li>1 onion, diced</li><li>500ml low-salt veg stock</li><li>Handful of spinach</li></ul>
+        <ul>
+          <li>1 tin cannellini beans, drained</li>
+          <li>1 tin chopped tomatoes</li>
+          <li>100g small pasta (orzo or ditalini)</li>
+          <li>1 carrot, diced</li>
+          <li>1 courgette, diced</li>
+          <li>1 onion, diced</li>
+          <li>500ml low-salt vegetable stock</li>
+          <li>Handful of spinach</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Soften onion 3 min. Add carrot and courgette, cook 3 min.</li><li>Add tomatoes, stock, and beans. Bring to boil.</li><li>Add pasta, simmer 10-12 min. Stir in spinach. Serve with bread.</li></ol>
+        <ol>
+          <li>Soften onion in oil for 3 min. Add carrot and courgette, cook 3 min.</li>
+          <li>Add tomatoes, stock, and beans. Bring to boil.</li>
+          <li>Add pasta, simmer 10-12 min until pasta and veg are tender.</li>
+          <li>Stir in spinach until wilted. Serve with crusty bread.</li>
+        </ol>
+        <div class="toddler-note">Thick, hearty soup. Use small pasta shapes for the toddler. Great for batch cooking.</div>
       </div>
     </div>
-    <div class="recipe-card cat-legumes">
-      <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Lentil Bolognese</span>
-        <div class="recipe-meta"><span>35 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
-      </div>
-      <div class="recipe-details">
-        <h4>Ingredients</h4>
-        <ul><li>150g red or green lentils</li><li>1 tin chopped tomatoes</li><li>1 onion, finely diced</li><li>1 carrot, grated</li><li>1 courgette, grated</li><li>2 garlic cloves, minced</li><li>1 tbsp tomato pur&eacute;e</li><li>Pasta to serve</li></ul>
-        <h4>Instructions</h4>
-        <ol><li>Soften onion and garlic. Add grated carrot and courgette.</li><li>Add lentils, tomatoes, pur&eacute;e, 300ml water. Simmer 25 min.</li><li>Serve over pasta. Freezes brilliantly.</li></ol>
-      </div>
-    </div>
+
     <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
         <span class="recipe-title">Hummus & Roasted Vegetable Wraps</span>
@@ -823,9 +1249,48 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Hummus</li><li>1 courgette, sliced</li><li>1 pepper, sliced</li><li>Tortilla wraps</li><li>Salad leaves</li><li>50g feta (optional)</li></ul>
+        <ul>
+          <li>Hummus (shop-bought or homemade)</li>
+          <li>1 courgette, sliced</li>
+          <li>1 pepper, sliced</li>
+          <li>1 aubergine, cubed (optional)</li>
+          <li>Tortilla wraps</li>
+          <li>Handful of salad leaves</li>
+          <li>50g feta cheese (optional)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Roast veg at 200&deg;C for 15-20 min with olive oil.</li><li>Warm tortillas. Spread with hummus.</li><li>Fill with roasted veg, salad, feta. Roll up.</li></ol>
+        <ol>
+          <li>Roast vegetables at 200&deg;C for 15-20 min with a drizzle of olive oil.</li>
+          <li>Warm tortillas. Spread generously with hummus.</li>
+          <li>Fill with roasted veg, salad, and crumbled feta. Roll up and cut in half.</li>
+        </ol>
+        <div class="toddler-note">Serve deconstructed for the toddler: hummus for dipping, soft roasted veg pieces, torn wrap. Chickpea hummus = good iron + protein.</div>
+      </div>
+    </div>
+
+    <div class="recipe-card cat-legumes">
+      <div class="recipe-header" onclick="toggleCard(this)">
+        <span class="recipe-title">Bean & Cheese Burritos</span>
+        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
+      </div>
+      <div class="recipe-details">
+        <h4>Ingredients</h4>
+        <ul>
+          <li>1 tin kidney beans or pinto beans, drained</li>
+          <li>100g cheese, grated</li>
+          <li>4 tortillas</li>
+          <li>1 tsp cumin</li>
+          <li>100g rice (optional)</li>
+          <li>Salsa or diced tomato</li>
+          <li>Sour cream or yogurt</li>
+        </ul>
+        <h4>Instructions</h4>
+        <ol>
+          <li>Heat beans in a pan with cumin. Mash roughly with a fork.</li>
+          <li>Warm tortillas. Fill with beans, rice, cheese, and salsa.</li>
+          <li>Roll up. Can be eaten cold or warmed in the oven for 5 min.</li>
+        </ol>
+        <div class="toddler-note">Mash beans well for the toddler. Cut burrito into small rounds. Skip salsa if too spicy &mdash; use plain diced tomato instead.</div>
       </div>
     </div>
   </div>
@@ -839,53 +1304,103 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Wholemeal bread</li><li>Cheese slices</li><li>Tomato, sliced thin</li><li>Butter</li></ul>
+        <ul>
+          <li>Wholemeal bread</li>
+          <li>Cheese slices</li>
+          <li>Tomato, sliced thin</li>
+          <li>Butter</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Butter bread. Layer cheese and tomato. Cut into small triangles or fingers.</li></ol>
-        <div class="toddler-note">Cut into small pieces. Remove crusts if your toddler prefers.</div>
+        <ol>
+          <li>Butter bread. Layer cheese and tomato. Cut into small triangles or fingers.</li>
+        </ol>
+        <div class="toddler-note">Cut into small pieces. Remove crusts if your toddler prefers. Quick and satisfying.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Dinner &mdash; Chicken</div>
-    <div class="recipe-card cat-chicken">
+    <div class="meal-section-title">Dinner &mdash; Fish</div>
+
+    <div class="recipe-card cat-fish">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Mild Chicken Curry with Rice</span>
-        <div class="recipe-meta"><span>35 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Pan-Fried Cod with Lemon Butter &amp; Smashed Peas</span>
+        <div class="recipe-meta"><span>15 min</span><span>Best fresh</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 chicken breasts, diced</li><li>1 onion, diced</li><li>1 tin coconut milk</li><li>1 tin chopped tomatoes</li><li>2 tsp mild korma or curry powder</li><li>100g frozen peas</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>2 cod fillets (or any white fish &mdash; pollock, coley)</li>
+          <li>200g frozen peas</li>
+          <li>1 tbsp butter + 1 tbsp olive oil</li>
+          <li>1 garlic clove, minced</li>
+          <li>Juice of 1/2 lemon</li>
+          <li>Handful of parsley (optional)</li>
+          <li>Bread or baby potatoes to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Brown chicken 5 min. Add onion, cook 3 min.</li><li>Add curry powder 1 min. Pour in tomatoes and coconut milk.</li><li>Simmer 20 min. Add peas last 5 min. Serve over rice.</li></ol>
-        <div class="toddler-note">Korma-style is naturally mild and creamy. Cut chicken small.</div>
+        <ol>
+          <li>Pat cod dry with kitchen paper. Season lightly.</li>
+          <li>Heat butter and olive oil in a non-stick pan over medium-high heat.</li>
+          <li>Cook cod 3&ndash;4 min per side until golden and flakes easily. Add garlic and lemon juice in the last minute.</li>
+          <li>Meanwhile, boil peas 3 min. Drain and lightly smash with a fork and a knob of butter.</li>
+          <li>Serve cod on smashed peas with bread or potatoes. Spoon pan juices over the fish.</li>
+        </ol>
+        <div class="toddler-note">Flake fish carefully, checking for bones. Cod is very mild &mdash; great for toddlers. Smashed peas are an easy texture for small mouths.</div>
       </div>
     </div>
-    <div class="recipe-card cat-chicken">
+
+    <div class="recipe-card cat-fish">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Chicken & Leek Hotpot</span>
-        <div class="recipe-meta"><span>40 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Baked Salmon with Roasted Vegetables</span>
+        <div class="recipe-meta"><span>30 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 chicken breasts, diced</li><li>2 leeks, sliced</li><li>2 carrots, diced</li><li>3 potatoes, cubed</li><li>100g green beans or broccoli</li><li>2 tbsp cream cheese</li><li>300ml low-salt chicken stock</li></ul>
+        <ul>
+          <li>2 salmon fillets</li>
+          <li>2 sweet potatoes, cubed</li>
+          <li>1 pepper, diced</li>
+          <li>1 courgette, sliced</li>
+          <li>Broccoli florets</li>
+          <li>1 tbsp olive oil</li>
+          <li>Lemon juice</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Fry chicken until golden (5 min). Add leeks and carrots, cook 3 min.</li><li>Add potatoes and stock. Simmer 20 min.</li><li>Add green beans last 5 min. Stir in cream cheese.</li></ol>
-        <div class="toddler-note">Mash or chop to preferred texture. One-pot meal, minimal washing up.</div>
+        <ol>
+          <li>Toss sweet potato, pepper, and courgette in oil. Roast at 200&deg;C for 15 min.</li>
+          <li>Add broccoli and salmon fillets to the tray. Squeeze lemon over salmon.</li>
+          <li>Roast another 12-15 min until salmon is cooked through.</li>
+          <li>Serve everything from the tray. One-pan meal, minimal cleanup.</li>
+        </ol>
+        <div class="toddler-note">Flake salmon carefully, checking for bones. Cut roasted veg small. Salmon = best source of omega-3 DHA for brain development.</div>
       </div>
     </div>
-    <div class="recipe-card cat-chicken">
+
+    <div class="recipe-card cat-fish">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Rice Bowl with Chicken, Corn, Peas & Carrots</span>
-        <div class="recipe-meta"><span>25 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Cod in Tomato Sauce with Rice</span>
+        <div class="recipe-meta"><span>25 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 chicken breasts, diced</li><li>250g rice</li><li>100g sweetcorn</li><li>100g frozen peas</li><li>1 large carrot, diced small</li><li>2 tbsp low-salt soy sauce</li><li>1 tbsp sesame oil</li><li>1 garlic clove, minced</li></ul>
+        <ul>
+          <li>2 cod fillets (or any white fish)</li>
+          <li>1 tin chopped tomatoes</li>
+          <li>1 onion, diced</li>
+          <li>1 garlic clove, minced</li>
+          <li>Handful of olives (optional, for adults)</li>
+          <li>1 tsp paprika</li>
+          <li>Rice to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook rice. Heat sesame oil in a wok.</li><li>Fry chicken until golden and cooked through (6-7 min).</li><li>Add garlic, carrot, peas, and sweetcorn. Stir-fry 3-4 min.</li><li>Add soy sauce, toss with rice, and serve.</li></ol>
-        <div class="toddler-note">Cut chicken small. Use reduced-salt soy sauce. This is the chicken version of Monday's tofu rice bowl!</div>
+        <ol>
+          <li>Cook rice according to packet.</li>
+          <li>Soften onion and garlic. Add tomatoes and paprika. Simmer 10 min.</li>
+          <li>Nestle fish fillets into the sauce. Cover and cook 10-12 min until fish flakes easily.</li>
+          <li>Serve fish and sauce over rice.</li>
+        </ol>
+        <div class="toddler-note">Flake fish carefully for the toddler. The tomato sauce adds vitamin C, which helps absorb iron from the fish. Skip olives for the child.</div>
       </div>
     </div>
   </div>
@@ -897,10 +1412,9 @@
     <h2>Saturday</h2>
     <div class="protein-badges">
       <span class="protein-badge badge-chicken">Chicken</span>
-      <span class="protein-badge badge-beef">Beef</span>
+      <span class="protein-badge badge-legumes">Legumes/Beans</span>
     </div>
   </div>
-  <div class="batch-note"><strong>Lunch:</strong> Enjoy Friday's chicken from the fridge. <strong>Dinner:</strong> Cook beef fresh &mdash; leftovers go to Sunday.</div>
 
   <div class="meal-section">
     <div class="meal-section-title">Morning Snack</div>
@@ -911,53 +1425,101 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>1 ripe banana, mashed</li><li>1 egg</li><li>50g oats (blended into rough flour)</li><li>Pinch of cinnamon</li></ul>
+        <ul>
+          <li>1 ripe banana, mashed</li>
+          <li>1 egg</li>
+          <li>50g oats (blended into rough flour)</li>
+          <li>Pinch of cinnamon</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Blend oats into rough flour. Mix with banana, egg, and cinnamon.</li><li>Drop spoonfuls onto a non-stick pan on medium heat.</li><li>Cook 2 min per side. Makes about 8 mini pancakes.</li></ol>
-        <div class="toddler-note">No added sugar &mdash; sweetness from banana. Perfect finger food.</div>
+        <ol>
+          <li>Blend oats into rough flour. Mix with mashed banana, egg, and cinnamon.</li>
+          <li>Drop spoonfuls onto a non-stick pan on medium heat.</li>
+          <li>Cook 2 min per side until golden. Makes about 8 mini pancakes.</li>
+          <li>Serve warm with fruit. Extras store in fridge 2 days or freeze for 1 month.</li>
+        </ol>
+        <div class="toddler-note">No added sugar &mdash; sweetness comes from the banana. Great batch-cook option for the week. Perfect finger food.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Lunch &mdash; Chicken (Friday's leftovers)</div>
+    <div class="meal-section-title">Lunch &mdash; Chicken</div>
+
     <div class="recipe-card cat-chicken">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Mild Chicken Curry with Rice</span>
-        <div class="recipe-meta"><span>Friday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Chicken Wraps with Avocado</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 chicken breasts, diced</li><li>1 onion, diced</li><li>1 tin coconut milk</li><li>1 tin chopped tomatoes</li><li>2 tsp mild korma or curry powder</li><li>100g frozen peas</li><li>Rice to serve</li></ul>
+        <ul>
+          <li>2 chicken breasts, sliced</li>
+          <li>1 avocado, sliced</li>
+          <li>Tortilla wraps</li>
+          <li>Handful of salad leaves</li>
+          <li>Natural yogurt</li>
+          <li>1 tsp paprika</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Brown chicken 5 min. Add onion, cook 3 min.</li><li>Add curry powder 1 min. Pour in tomatoes and coconut milk.</li><li>Simmer 20 min. Add peas last 5 min. Serve over rice.</li></ol>
-        <div class="toddler-note">Korma-style is naturally mild and creamy. Cut chicken small.</div>
+        <ol>
+          <li>Season chicken with paprika. Pan-fry 5-6 min per side until cooked.</li>
+          <li>Slice chicken. Warm tortillas.</li>
+          <li>Fill wraps with chicken, avocado, salad, and a dollop of yogurt.</li>
+        </ol>
+        <div class="toddler-note">Serve deconstructed: small chicken pieces, avocado slices, torn tortilla. Let the toddler self-feed.</div>
       </div>
     </div>
+
     <div class="recipe-card cat-chicken">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Chicken & Leek Hotpot</span>
-        <div class="recipe-meta"><span>Friday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Chicken Noodle Soup</span>
+        <div class="recipe-meta"><span>25 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 chicken breasts, diced</li><li>2 leeks, sliced</li><li>2 carrots, diced</li><li>3 potatoes, cubed</li><li>100g green beans or broccoli</li><li>2 tbsp cream cheese</li><li>300ml low-salt chicken stock</li></ul>
+        <ul>
+          <li>2 chicken breasts</li>
+          <li>100g egg noodles or small pasta</li>
+          <li>2 carrots, sliced</li>
+          <li>2 celery sticks, sliced</li>
+          <li>800ml low-salt chicken stock</li>
+          <li>Handful of sweetcorn</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Fry chicken until golden. Add leeks and carrots, cook 3 min.</li><li>Add potatoes and stock. Simmer 20 min.</li><li>Add green beans last 5 min. Stir in cream cheese.</li></ol>
-        <div class="toddler-note">Mash or chop to preferred texture.</div>
+        <ol>
+          <li>Simmer chicken breasts in stock for 12 min. Remove and shred.</li>
+          <li>Add carrots, celery, and noodles to the stock. Cook 8 min.</li>
+          <li>Return shredded chicken and sweetcorn. Heat through.</li>
+          <li>Serve in bowls. Classic comfort food.</li>
+        </ol>
+        <div class="toddler-note">Cut noodles short with scissors. Ensure broth isn't too hot. Great when anyone in the family is under the weather.</div>
       </div>
     </div>
+
     <div class="recipe-card cat-chicken">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Rice Bowl with Chicken, Corn, Peas & Carrots</span>
-        <div class="recipe-meta"><span>Friday's batch</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Chicken & Vegetable Fried Rice</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>2 chicken breasts, diced</li><li>250g rice</li><li>100g sweetcorn</li><li>100g frozen peas</li><li>1 large carrot, diced small</li><li>2 tbsp low-salt soy sauce</li><li>1 tbsp sesame oil</li><li>1 garlic clove, minced</li></ul>
+        <ul>
+          <li>2 chicken breasts, diced small</li>
+          <li>250g cooked rice (cold, leftover is best)</li>
+          <li>1 egg</li>
+          <li>100g frozen peas</li>
+          <li>1 carrot, finely diced</li>
+          <li>1 tbsp low-salt soy sauce</li>
+          <li>1 tbsp sesame oil</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Cook rice. Fry chicken until golden (6-7 min).</li><li>Add garlic, carrot, peas, sweetcorn. Stir-fry 3-4 min.</li><li>Add soy sauce, toss with rice.</li></ol>
-        <div class="toddler-note">Cut chicken small. Use reduced-salt soy sauce.</div>
+        <ol>
+          <li>Heat oil in a wok. Stir-fry chicken 5 min. Add carrot and peas, cook 3 min.</li>
+          <li>Push to the side, scramble egg in the pan.</li>
+          <li>Add cold rice and soy sauce. Toss everything on high heat 3 min.</li>
+        </ol>
+        <div class="toddler-note">Similar to Tuesday's egg fried rice but with chicken protein. Dice everything small. Reheat rice until piping hot.</div>
       </div>
     </div>
   </div>
@@ -971,53 +1533,109 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Broccoli florets</li><li>Carrot sticks</li><li>Plain yogurt with a squeeze of lemon</li></ul>
+        <ul>
+          <li>Broccoli florets</li>
+          <li>Carrot sticks</li>
+          <li>Plain yogurt mixed with a squeeze of lemon</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Steam broccoli and carrots 5-6 min until tender but not mushy.</li><li>Cool slightly. Serve with yogurt dip.</li></ol>
+        <ol>
+          <li>Steam broccoli and carrots for 5-6 min until tender but not mushy.</li>
+          <li>Cool slightly. Serve with yogurt dip.</li>
+          <li>Batch-prep: steam a big batch at the start of the week.</li>
+        </ol>
         <div class="toddler-note">Steamed veg is softer and safer than raw for toddlers. Broccoli is a good source of iron and vitamin C.</div>
       </div>
     </div>
   </div>
 
   <div class="meal-section">
-    <div class="meal-section-title">Dinner &mdash; Beef (1x per week)</div>
-    <div class="recipe-card cat-beef">
+    <div class="meal-section-title">Dinner &mdash; Legumes / Beans</div>
+
+    <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Meatballs in Tomato Sauce with Pasta</span>
-        <div class="recipe-meta"><span>45 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Creamy White Bean &amp; Tomato Pasta</span>
+        <div class="recipe-meta"><span>20 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>400g lean beef mince</li><li>1 egg</li><li>50g breadcrumbs</li><li>1 tin chopped tomatoes</li><li>1 onion, finely diced</li><li>2 garlic cloves, minced</li><li>1 tbsp tomato pur&eacute;e</li><li>Pasta to serve</li></ul>
+        <ul>
+          <li>250g pasta (penne or fusilli)</li>
+          <li>1 x 400g tin cannellini beans, drained</li>
+          <li>200g cherry tomatoes, halved</li>
+          <li>2 garlic cloves, minced</li>
+          <li>Handful of spinach</li>
+          <li>2 tbsp cream cheese</li>
+          <li>1 tbsp olive oil</li>
+          <li>Grated Parmesan to serve</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Mix mince, egg, breadcrumbs. Roll into small balls.</li><li>Brown meatballs 5 min. Remove.</li><li>Soften onion and garlic. Add tomatoes and pur&eacute;e. Simmer 10 min.</li><li>Return meatballs, simmer 20 min. Serve over pasta.</li></ol>
-        <div class="toddler-note">Make meatballs small (half a golf ball). Soft in sauce = easy to eat. Red meat is the best source of easily-absorbed iron. Freeze extras.</div>
+        <ol>
+          <li>Cook pasta according to packet.</li>
+          <li>Heat olive oil in a pan. Add garlic, cook 1 min. Add cherry tomatoes, cook 3&ndash;4 min until softened.</li>
+          <li>Add cannellini beans and a splash of pasta water. Mash a few beans with a fork for creaminess.</li>
+          <li>Stir in spinach until wilted, then cream cheese until smooth.</li>
+          <li>Drain pasta, toss with sauce. Serve with Parmesan.</li>
+        </ol>
+        <div class="toddler-note">Mashed beans create a naturally creamy sauce with no cream needed. Cut pasta short. Cannellini beans are mild and soft &mdash; easy for toddlers.</div>
       </div>
     </div>
-    <div class="recipe-card cat-beef">
+
+    <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Classic Cottage Pie</span>
-        <div class="recipe-meta"><span>50 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Quick Black Bean Tacos</span>
+        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>400g extra-lean beef mince</li><li>4 potatoes, peeled and cubed</li><li>1 onion, diced</li><li>2 carrots, diced small</li><li>1 courgette, diced</li><li>100g frozen peas</li><li>1 tin chopped tomatoes</li><li>Splash of milk and knob of butter for mash</li></ul>
+        <ul>
+          <li>1 x 400g tin black beans, drained</li>
+          <li>1 tsp cumin, 1 tsp paprika</li>
+          <li>1 tbsp lime juice</li>
+          <li>4&ndash;6 small soft tortillas</li>
+          <li>100g cheese, grated</li>
+          <li>1 avocado, sliced</li>
+          <li>Plain yogurt</li>
+          <li>Handful of shredded lettuce (optional)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Boil potatoes 15 min. Mash with milk and butter.</li><li>Brown mince, drain fat. Add onion, carrot, courgette. Cook 5 min.</li><li>Add tomatoes and peas. Simmer 15 min.</li><li>Transfer to oven dish, top with mash. Bake at 200&deg;C for 15-20 min.</li></ol>
-        <div class="toddler-note">Soft mashed texture is perfect for toddlers. Hidden vegetables. Make two and freeze one.</div>
+        <ol>
+          <li>Heat beans in a pan with cumin, paprika, and a splash of water. Cook 3 min.</li>
+          <li>Mash roughly with a fork &mdash; leave some whole for texture.</li>
+          <li>Add lime juice and stir through.</li>
+          <li>Warm tortillas in a dry pan or microwave for 15 seconds each.</li>
+          <li>Fill tortillas with beans, cheese, avocado, yogurt, and lettuce.</li>
+        </ol>
+        <div class="toddler-note">Serve deconstructed for the toddler: mashed beans, cheese, avocado pieces, torn tortilla. Black beans are an excellent iron and fibre source. Mild spices only.</div>
       </div>
     </div>
-    <div class="recipe-card cat-beef">
+
+    <div class="recipe-card cat-legumes">
       <div class="recipe-header" onclick="toggleCard(this)">
-        <span class="recipe-title">Beef & Vegetable Stew</span>
-        <div class="recipe-meta"><span>45 min</span><span>Fridge: 2 days</span><span class="toggle-icon">&#9654;</span></div>
+        <span class="recipe-title">Lentil &amp; Veggie Fried Rice</span>
+        <div class="recipe-meta"><span>15 min</span><span>Fridge: 1 day</span><span class="toggle-icon">&#9654;</span></div>
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>300g stewing beef or lean mince</li><li>3 potatoes, cubed</li><li>2 carrots, sliced</li><li>1 onion, diced</li><li>100g green beans</li><li>500ml low-salt beef stock</li><li>1 tbsp tomato pur&eacute;e</li></ul>
+        <ul>
+          <li>250g pre-cooked lentils (pouch or tinned, drained)</li>
+          <li>250g cooked rice (microwave packet for speed)</li>
+          <li>1 egg, beaten</li>
+          <li>100g frozen peas</li>
+          <li>1 carrot, finely diced</li>
+          <li>1 tbsp low-salt soy sauce</li>
+          <li>1 tbsp sesame oil</li>
+          <li>1 spring onion, sliced (optional)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Brown beef. Add onion, cook 3 min.</li><li>Add carrots, potatoes, stock, pur&eacute;e. Bring to boil.</li><li>Reduce heat, cover, simmer 30 min.</li><li>Add green beans last 5 min. Serve with bread.</li></ol>
-        <div class="toddler-note">Chop or mash meat and veg for the toddler. One-pot meal &mdash; tastes even better the next day.</div>
+        <ol>
+          <li>Heat sesame oil in a wok or large pan. Fry carrot and peas 3 min.</li>
+          <li>Add lentils, stir 2 min until heated through.</li>
+          <li>Push everything to the side. Scramble the egg in the empty space.</li>
+          <li>Add rice and soy sauce. Toss everything on high heat for 2&ndash;3 min.</li>
+          <li>Garnish with spring onion. Serve immediately.</li>
+        </ol>
+        <div class="toddler-note">Lentils are soft and easy for toddlers to eat. Use reduced-salt soy sauce. Pre-cooked lentil pouches make this genuinely a 15-min meal. Good iron + fibre source.</div>
       </div>
     </div>
   </div>
@@ -1041,10 +1659,17 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>Hummus</li><li>1 pitta bread, toasted and cut into fingers</li><li>Carrot sticks</li></ul>
+        <ul>
+          <li>Hummus (shop-bought or homemade)</li>
+          <li>1 pitta bread, toasted and cut into fingers</li>
+          <li>Carrot sticks</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Toast pitta, cut into finger-sized strips.</li><li>Serve with hummus and carrot sticks for dipping.</li></ol>
-        <div class="toddler-note">Steam carrots lightly if your toddler finds raw ones too hard. Hummus = great iron + protein from chickpeas.</div>
+        <ol>
+          <li>Toast pitta, cut into finger-sized strips.</li>
+          <li>Serve with hummus and carrot sticks for dipping.</li>
+        </ol>
+        <div class="toddler-note">Steam carrots lightly if your toddler finds raw ones too hard. Hummus is a great iron + protein combo from chickpeas.</div>
       </div>
     </div>
   </div>
@@ -1053,13 +1678,13 @@
     <div class="meal-section-title">Lunch & Dinner &mdash; Leftovers</div>
     <div class="sunday-card">
       <h3>Use up what's in the fridge!</h3>
-      <p style="margin-bottom: 0.8rem; color: #666;">Sunday is for finishing leftovers from the week. Reduces waste and gives you a cooking break.</p>
+      <p style="margin-bottom: 0.8rem; color: #666;">Sunday is for finishing leftovers from the week. This reduces waste and gives you a cooking break. Here are some tips:</p>
       <ul>
-        <li><strong>Saturday's beef</strong> (meatballs, cottage pie, stew) all keep 2 days and reheat perfectly.</li>
-        <li><strong>Cottage pie</strong> reheats in the oven (180&deg;C, 20-25 min from fridge).</li>
-        <li><strong>Fish pie or curries</strong> reheat on the stove or microwave until piping hot.</li>
-        <li><strong>Frittata</strong> is great cold or gently reheated.</li>
-        <li><strong>Any leftover rice dishes</strong> &mdash; reheat until piping hot throughout.</li>
+        <li><strong>Stews, dhal, and curries</strong> taste even better the next day. Reheat until piping hot throughout.</li>
+        <li><strong>Cottage pie and fish pie</strong> reheat perfectly in the oven (180&deg;C, 20-25 min from fridge).</li>
+        <li><strong>Pasta sauces</strong> (lentil bolognese, meatball sauce) can be reheated and served over fresh pasta.</li>
+        <li><strong>Frittata and quiches</strong> are great cold or gently reheated.</li>
+        <li><strong>Soups</strong> reheat on the stove &mdash; add a splash of water if too thick.</li>
         <li><strong>Batch-cooked snacks</strong> (egg muffins, pancakes, energy bites) should still be good.</li>
       </ul>
       <p style="margin-top: 0.8rem; font-size: 0.85rem; color: #888;"><strong>Safety:</strong> Reheat leftovers until piping hot (70&deg;C+). Use within 2 days of cooking. Don't reheat more than once.</p>
@@ -1075,10 +1700,20 @@
       </div>
       <div class="recipe-details">
         <h4>Ingredients</h4>
-        <ul><li>100g rolled oats</li><li>3 tbsp smooth peanut or almond butter</li><li>2 tbsp honey</li><li>50g raisins or chopped dates</li><li>1 tbsp desiccated coconut (optional)</li></ul>
+        <ul>
+          <li>100g rolled oats</li>
+          <li>3 tbsp smooth peanut or almond butter</li>
+          <li>2 tbsp honey</li>
+          <li>50g raisins or chopped dates</li>
+          <li>1 tbsp desiccated coconut (optional)</li>
+        </ul>
         <h4>Instructions</h4>
-        <ol><li>Mix all ingredients until well combined.</li><li>Roll into small balls (12-15). Refrigerate 30 min to firm up.</li><li>Store in airtight container in fridge up to 5 days, or freeze 2 months.</li></ol>
-        <div class="toddler-note">Make these on Sunday for the whole week ahead. Use smooth nut butter.</div>
+        <ol>
+          <li>Mix all ingredients in a bowl until well combined.</li>
+          <li>Roll into small balls (about 12-15). Refrigerate 30 min to firm up.</li>
+          <li>Store in an airtight container in the fridge for up to 5 days, or freeze for 2 months.</li>
+        </ol>
+        <div class="toddler-note">Make these on Sunday for the whole week ahead. Use smooth nut butter. For under-2s, skip honey and use mashed banana instead.</div>
       </div>
     </div>
   </div>
@@ -1088,17 +1723,14 @@
 <div class="nutrition-footer">
   <h3>Weekly Nutrition Summary</h3>
   <ul>
-    <li><strong>Fish:</strong> 2 dinners/week (Mon + Tue) &mdash; salmon and white fish for omega-3 DHA. Cook Monday, eat Tuesday from the fridge.</li>
-    <li><strong>Eggs:</strong> 2 dinners/week (Wed + Thu) &mdash; iron, protein, vitamin D. Cook Wednesday, eat Thursday from the fridge.</li>
-    <li><strong>Chicken:</strong> 2x/week (Fri dinner + Sat lunch) &mdash; lean protein, iron, zinc. Cook Friday, eat Saturday lunch from the fridge.</li>
-    <li><strong>Beef:</strong> 1x/week (Sat dinner) &mdash; best source of easily-absorbed (heme) iron. Once per week is beneficial for the whole family including your daughter.</li>
-    <li><strong>Legumes:</strong> Weekday lunches only (Mon-Fri, adults) &mdash; plant protein, iron, fiber. Your daughter gets her legumes at school.</li>
+    <li><strong>Fish:</strong> 2x/week (Tue lunch + Fri dinner) &mdash; salmon and white fish for omega-3 DHA</li>
+    <li><strong>Chicken:</strong> 3x/week (Mon + Wed + Sat) &mdash; lean protein, iron, zinc</li>
+    <li><strong>Legumes/beans/tofu:</strong> 4x/week (Mon dinner + Wed lunch + Fri lunch + Sat dinner) &mdash; plant protein, iron, fiber</li>
+    <li><strong>Eggs:</strong> 2x/week (Tue dinner + Thu lunch) &mdash; iron, protein, vitamin D</li>
+    <li><strong>Beef:</strong> 1x/week (Thu dinner) &mdash; best iron source, limit red meat per WHO/NHS</li>
   </ul>
   <p style="margin-top: 0.6rem;">
-    <strong>Batch cooking pattern:</strong> Cook on Mon/Wed/Fri/Sat &mdash; eat leftovers on Tue/Thu/Sat lunch/Sun. Only 4 real cooking days per week.
-  </p>
-  <p style="margin-top: 0.4rem; font-size: 0.75rem; color: #999;">
-    Sources: AAP, NHS Healthier Families, USDA Dietary Guidelines 2020-2025, WHO, CDC, FDA/EPA Fish Advisory.
+    <strong>Sources:</strong> AAP (HealthyChildren.org), NHS Healthier Families, USDA Dietary Guidelines 2020-2025, WHO Complementary Feeding Guidelines, CDC Infant/Toddler Nutrition, FDA/EPA Fish Advisory.
   </p>
 </div>
 
